@@ -1,844 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hua Quang Phuoc - Portfolio</title>
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* --- CSS STYLES --- */
-        
-        /* Reset & Global Styles */
-        :root {
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
-            --text-main: #e0e0e0;
-            --text-muted: #a0a0a0;
-            --accent-color: #4facfe;
-            --accent-gradient: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-            --nav-bg: rgba(26, 26, 26, 0.95);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: color 0.3s ease;
-        }
-
-        ul {
-            list-style: none;
-        }
-
-        /* Navigation */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-            background-color: var(--nav-bg);
-            padding: 0 5%;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #333;
-        }
-
-        .logo {
-            color: var(--accent-color);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 24px;
-            font-weight: 800;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            font-weight: 500;
-            font-size: 0.95rem;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-image: var(--accent-gradient);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #fff;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .burger {
-            display: none;
-            cursor: pointer;
-        }
-
-        .burger div {
-            width: 25px;
-            height: 3px;
-            background-color: var(--text-main);
-            margin: 5px;
-            transition: all 0.3s ease;
-        }
-
-        /* Hero Section */
-        #intro {
-            min-height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 10%;
-            background: radial-gradient(circle at top right, #1f2833 0%, #121212 60%);
-        }
-
-        .hero-content {
-            flex: 1;
-            padding-right: 50px;
-            animation: fadeInLeft 1s ease forwards;
-        }
-
-        .hero-content h3 {
-            font-size: 1.2rem;
-            color: var(--accent-color);
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 15px;
-            line-height: 1.1;
-            background: -webkit-linear-gradient(#fff, #888);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 10px;
-        }
-
-        .hero-content .highlight {
-            color: #00f2fe;
-            font-weight: bold;
-            margin-bottom: 30px;
-            display: inline-block;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background-image: var(--accent-gradient);
-            border-radius: 50px;
-            color: #fff;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.6);
-            color: #fff;
-        }
-
-        .hero-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            position: relative;
-            animation: fadeInRight 1s ease forwards;
-        }
-
-        .hero-image::before {
-            content: '';
-            position: absolute;
-            width: 350px;
-            height: 350px;
-            background: var(--accent-gradient);
-            border-radius: 50%;
-            opacity: 0.1;
-            filter: blur(50px);
-            z-index: -1;
-        }
-
-        .hero-image img {
-            width: 320px;
-            height: 320px;
-            object-fit: cover;
-            border-radius: 50%;
-            border: 4px solid #2a2a2a;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        /* Sections General */
-        section {
-            padding: 100px 10%;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 60px;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--accent-gradient);
-            margin: 15px auto 0;
-            border-radius: 2px;
-        }
-
-        /* About Section */
-        #about {
-            background-color: #151515;
-        }
-        
-        .about-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            border: 1px solid #333;
-        }
-
-        .about-text {
-            text-align: center;
-        }
-
-        .about-text p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            color: var(--text-muted);
-        }
-
-        .personal-info {
-            margin-top: 30px;
-            padding-top: 30px;
-            border-top: 1px solid #333;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .info-item {
-            text-align: center;
-        }
-        
-        .info-item i {
-            color: var(--accent-color);
-            margin-bottom: 5px;
-            font-size: 1.2rem;
-        }
-
-        .info-item span {
-            display: block;
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
-
-        .info-item a {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-        
-        .info-item a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Academics Section */
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            padding: 40px 30px;
-            border-radius: 16px;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: 1px solid #333;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--accent-gradient);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-            transform-origin: left;
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border-color: #444;
-        }
-
-        .card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .card-icon {
-            font-size: 3rem;
-            background: -webkit-linear-gradient(#4facfe, #00f2fe);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 25px;
-        }
-
-        .card h3 {
-            margin-bottom: 15px;
-            font-size: 1.4rem;
-        }
-
-        .highlight-text {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #4facfe;
-            margin-top: 10px;
-        }
-
-        .card ul {
-            text-align: left;
-            margin-top: 15px;
-            padding-left: 20px;
-        }
-        
-        .card li {
-            margin-bottom: 8px;
-            color: var(--text-muted);
-            list-style-type: disc;
-        }
-
-        /* Projects Section */
-        #projects {
-            background-color: #151515;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 16px;
-            border: 1px solid #333;
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .project-card:hover {
-            border-color: var(--accent-color);
-            box-shadow: 0 5px 20px rgba(79, 172, 254, 0.1);
-        }
-        
-        .project-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            gap: 15px;
-        }
-        
-        .project-icon {
-            font-size: 1.8rem;
-            color: var(--accent-color);
-        }
-
-        .project-card h3 {
-            font-size: 1.3rem;
-        }
-
-        .project-card p {
-            color: var(--text-muted);
-            margin-bottom: 20px;
-            font-size: 0.95rem;
-        }
-
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .skill-tag {
-            background: rgba(79, 172, 254, 0.1);
-            color: #4facfe;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
-        .skill-tag.highlight-skill {
-            background: var(--accent-gradient);
-            color: #fff;
-        }
-
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #fff;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-top: auto;
-        }
-        
-        .project-link:hover {
-            color: var(--accent-color);
-        }
-
-        /* Activities Section */
-        .activities-content {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
-
-        .activity-item {
-            text-align: center;
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 20px;
-            width: 280px;
-            border: 1px solid #333;
-            transition: all 0.4s ease;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
-        
-        .activity-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--accent-gradient);
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .activity-item:hover {
-            transform: translateY(-5px);
-            border-color: transparent;
-        }
-        
-        .activity-item:hover::after {
-            opacity: 0.05;
-        }
-        
-        .activity-item:hover i {
-            transform: scale(1.1) rotate(10deg);
-        }
-
-        .activity-item i {
-            font-size: 3.5rem;
-            color: var(--accent-color);
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .activity-item h4 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-        }
-        
-        .activity-item p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* Footer */
-        footer {
-            background: #0a0a0a;
-            text-align: center;
-            padding: 50px 10%;
-            border-top: 1px solid #333;
-        }
-
-        .footer-content h2 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .social-links {
-            margin: 30px 0;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        .social-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: #1e1e1e;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            color: #fff;
-            transition: all 0.3s ease;
-            border: 1px solid #333;
-        }
-
-        .social-btn:hover {
-            background: var(--accent-gradient);
-            border-color: transparent;
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-        
-        @keyframes fadeInRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        /* Responsive */
-        @media screen and (max-width: 968px) {
-            #intro {
-                flex-direction: column-reverse;
-                justify-content: center;
-                text-align: center;
-                padding-top: 120px;
-            }
-
-            .hero-content {
-                padding-right: 0;
-                margin-top: 40px;
-            }
-
-            .hero-content h1 {
-                font-size: 3rem;
-            }
-            
-            .nav-links {
-                position: fixed;
-                right: 0;
-                top: 80px;
-                height: calc(100vh - 80px);
-                background-color: var(--card-bg);
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                transform: translateX(100%);
-                transition: transform 0.4s ease-in-out;
-                border-top: 1px solid #333;
-            }
-
-            .nav-links.nav-active {
-                transform: translateX(0%);
-            }
-
-            .burger {
-                display: block;
-            }
-            
-            .toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
-            .toggle .line2 { opacity: 0; }
-            .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
-        }
-        
-        @media screen and (max-width: 480px) {
-            .hero-content h1 { font-size: 2.5rem; }
-            .hero-image img { width: 250px; height: 250px; }
-            .hero-image::before { width: 280px; height: 280px; }
-            section { padding: 60px 5%; }
-            .btn { padding: 10px 20px; font-size: 0.9rem; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hứa Quang Phước - Portfolio</title>
+<meta name="description" content="Hứa Quang Phước: Math student at PTNK, AI researcher and developer.">
+<style>
+:root{--bg:#121212;--card:#1e1e1e;--alt:#151515;--text:#e0e0e0;--muted:#a0a0a0;--accent:#4facfe;--grad:linear-gradient(to right,#4facfe,#00f2fe);--line:#333}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Verdana,sans-serif;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit;transition:color .3s}ul{list-style:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+nav{display:flex;justify-content:center;align-items:center;height:70px;background:rgba(26,26,26,.95);padding:0 5%;position:sticky;top:0;z-index:1000;backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-links{display:flex;gap:22px}
+.nav-links a{font-size:.9rem;font-weight:500;position:relative}
+.nav-links a::after{content:'';position:absolute;width:0;height:2px;bottom:-5px;left:0;background:var(--grad);transition:width .3s}
+.nav-links a:hover{color:#fff}.nav-links a:hover::after{width:100%}
+.burger{display:none;cursor:pointer;background:none;border:0}
+.burger div{width:25px;height:3px;background:var(--text);margin:5px;transition:.3s}
+#intro{min-height:90vh;display:flex;align-items:center;justify-content:space-between;padding:0 10%;background:radial-gradient(circle at top right,#1f2833 0%,#121212 60%)}
+.hero-content{flex:1;padding-right:50px;animation:fadeL 1s ease both}
+.hero-content h3{color:var(--accent);margin-bottom:8px}
+.hero-content h1{font-size:3.8rem;line-height:1.1;margin-bottom:15px;background:linear-gradient(#fff,#888);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero-content .role{color:#00f2fe;font-weight:700;font-size:1.2rem;margin-bottom:8px}
+.hero-content p{color:var(--muted);font-size:1.1rem;max-width:560px}
+.stats{display:flex;gap:28px;flex-wrap:wrap;margin:26px 0}
+.stat b{display:block;font-size:1.7rem;color:#fff}.stat span{font-size:.8rem;color:var(--muted)}
+.btn{display:inline-block;padding:11px 28px;background:var(--grad);border-radius:50px;color:#fff;font-weight:700;box-shadow:0 4px 15px rgba(79,172,254,.4);transition:transform .3s}
+.btn:hover{transform:translateY(-3px)}
+.btn.ghost{background:transparent;border:2px solid var(--accent);box-shadow:none;margin-left:8px}
+.hero-image{flex:1;display:flex;justify-content:center;animation:fadeR 1s ease both}
+.hero-image img{width:320px;height:320px;object-fit:cover;border-radius:50%;border:4px solid #2a2a2a;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+section{padding:90px 10%}
+.alt{background:var(--alt)}
+.section-title{text-align:center;font-size:2.3rem;margin-bottom:50px}
+.section-title::after{content:'';display:block;width:80px;height:4px;background:var(--grad);margin:14px auto 0;border-radius:2px}
+.sub{font-size:1.3rem;margin:40px 0 20px;color:#fff}
+.sub:first-of-type{margin-top:0}
+.about{max-width:820px;margin:0 auto;background:var(--card);padding:40px;border-radius:16px;border:1px solid var(--line);text-align:center}
+.about p{color:var(--muted);font-size:1.05rem;margin-bottom:16px}
+.info{display:flex;justify-content:space-around;flex-wrap:wrap;gap:20px;margin-top:24px;padding-top:24px;border-top:1px solid var(--line)}
+.info strong{display:block;color:var(--text);font-size:.9rem;margin-bottom:2px}
+.info a,.info span{font-size:.9rem;color:var(--muted)}.info a:hover{color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:26px}
+.card{background:var(--card);padding:28px;border-radius:16px;border:1px solid var(--line);transition:.3s;display:flex;flex-direction:column}
+.card:hover{border-color:var(--accent);transform:translateY(-6px);box-shadow:0 8px 24px rgba(79,172,254,.1)}
+.card .ic{font-size:1.8rem;color:var(--accent);margin-bottom:12px}
+.card h3{font-size:1.2rem;margin-bottom:4px}
+.meta{color:var(--accent);font-size:.85rem;font-weight:600;margin-bottom:10px}
+.card p{color:var(--muted);font-size:.93rem;margin-bottom:12px}
+.card ul{margin:0 0 14px 18px}.card li{list-style:disc;color:var(--muted);font-size:.9rem;margin-bottom:5px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.tag{background:rgba(79,172,254,.1);color:var(--accent);padding:4px 11px;border-radius:20px;font-size:.78rem;font-weight:600}
+.tag.hl{background:var(--grad);color:#fff}
+.badge{display:inline-block;background:rgba(0,242,254,.12);color:#00f2fe;border-radius:6px;padding:2px 9px;font-size:.75rem;font-weight:700;margin-bottom:10px;align-self:flex-start}
+.tl{max-width:860px;margin:0 auto;border-left:2px solid var(--line);padding-left:28px}
+.tl-item{position:relative;margin-bottom:30px}
+.tl-item::before{content:'';position:absolute;left:-37px;top:7px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--bg)}
+.tl-item h4{font-size:1.1rem}.tl-item .meta{margin-bottom:6px}
+.tl-item li{list-style:disc;margin-left:18px;color:var(--muted);font-size:.92rem;margin-bottom:4px}
+.pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.pill{background:var(--card);border:1px solid var(--line);border-radius:50px;padding:8px 18px;font-size:.9rem}
+.pill i{color:var(--accent);margin-right:6px}
+footer{background:#0a0a0a;text-align:center;padding:50px 10%;border-top:1px solid var(--line)}
+footer h2{font-size:2rem;margin-bottom:12px}
+.social{margin:26px 0;flex-wrap:wrap;display:flex;justify-content:center;gap:18px}
+.social a{padding:10px 22px;border-radius:50px;background:var(--card);display:flex;align-items:center;justify-content:center;border:1px solid var(--line);transition:.3s}
+.social a:hover{background:var(--grad);border-color:transparent;transform:translateY(-5px)}
+.copy{color:#777;font-size:.9rem}
+@keyframes fadeL{from{opacity:0;transform:translateX(-40px)}}
+@keyframes fadeR{from{opacity:0;transform:translateX(40px)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+@media(max-width:1100px){nav{justify-content:flex-end}.burger{display:block}
+.nav-links{position:fixed;right:0;top:70px;height:calc(100vh - 70px);width:100%;background:var(--card);flex-direction:column;align-items:center;justify-content:center;transform:translateX(100%);transition:transform .4s;gap:26px}
+.nav-links.open{transform:none}}
+@media(max-width:968px){#intro{flex-direction:column-reverse;justify-content:center;text-align:center;padding-top:80px;padding-bottom:40px}
+.hero-content{padding:30px 0 0}.hero-content h1{font-size:2.8rem}.hero-content p{margin:auto}.stats{justify-content:center}}
+@media(max-width:480px){section{padding:60px 5%}.hero-image img{width:240px;height:240px}.hero-content h1{font-size:2.3rem}.about{padding:26px}}
+</style>
 </head>
 <body>
+<nav>
+ <ul class="nav-links" id="menu">
+  <li><a href="#intro">Home</a></li><li><a href="#about">About</a></li><li><a href="#academics">Academics</a></li>
+  <li><a href="#research">Research</a></li><li><a href="#projects">Projects</a></li><li><a href="#experience">Experience</a></li>
+  <li><a href="#community">Community</a></li><li><a href="#contact">Contact</a></li>
+ </ul>
+ <button class="burger" id="burger" aria-label="Toggle menu" aria-expanded="false"><div></div><div></div><div></div></button>
+</nav>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">PhuocHQ.</div>
-        <ul class="nav-links">
-            <li><a href="#intro">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#academics">Academics</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#activities">Activities</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-        <div class="burger">
-            <div class="line1"></div>
-            <div class="line2"></div>
-            <div class="line3"></div>
-        </div>
-    </nav>
+<section id="intro">
+ <div class="hero-content">
+  <h3>HELLO, I'M</h3>
+  <h1>Hứa Quang Phước</h1>
+  <p class="role">Math student · AI researcher · Builder</p>
+  <p>Studying Math at PTNK. I turn math into working software, from speech models to health-tech apps.</p>
+  <div class="stats">
+   <div class="stat"><b>9.6</b><span>GPA, current</span></div>
+   <div class="stat"><b>1490</b><span>SAT</span></div>
+   <div class="stat"><b>7.0</b><span>IELTS</span></div>
+   <div class="stat"><b>5/5/5</b><span>AP Calc BC · Stats · CSA</span></div>
+  </div>
+  <a href="#research" class="btn">See my research</a><a href="#contact" class="btn ghost">Get in touch</a>
+ </div>
+ <div class="hero-image"><img src="./463339833_1372982947440184_8568938141330448441_n.jpg" alt="Portrait of Hứa Quang Phước"></div>
+</section>
 
-    <!-- Hero Section -->
-    <section id="intro">
-        <div class="hero-content">
-            <h3>HELLO, I'M</h3>
-            <h1>Hứa Quang Phước</h1>
-            <p class="highlight">Class 11 Math &bull; Future CS/AI Engineer</p>
-            <p>I build things with code and solve problems with math.</p>
-            <br>
-            <a href="#contact" class="btn">Get In Touch</a>
-            <a href="#projects" class="btn" style="background: transparent; border: 2px solid #4facfe; margin-left: 10px;">View Work</a>
-        </div>
-        <div class="hero-image">
-            <img src="./463339833_1372982947440184_8568938141330448441_n.jpg" alt="Hua Quang Phuoc">
-        </div>
-    </section>
+<section id="about" class="alt">
+ <h2 class="section-title">About Me</h2>
+ <div class="about">
+  <p>I'm currently studying as a Math major at <strong>VNU-HCM High School for the Gifted (PTNK)</strong>, aiming for a career in <strong>Computer Science</strong> and <strong>Artificial Intelligence</strong>.</p>
+  <p>I do research in speech AI and forecasting, build products (a clinic management system, an exam-prep platform), and host a podcast about tech, study stress, and healthcare. I also lead and volunteer: HR at MARs, charity drives in Huế, and teaching at a children's shelter.</p>
+  <p>Football, badminton, and running keep me balanced.</p>
+  <div class="info">
+   <div><strong>Email</strong><a href="mailto:phuochq2009@gmail.com">phuochq2009@gmail.com</a></div>
+   <div><strong>GitHub</strong><a href="https://github.com/phuochq2009" target="_blank" rel="noopener">@phuochq2009</a></div>
+   <div><strong>School</strong><span>PTNK - ĐHQG TP.HCM</span></div>
+  </div>
+ </div>
+</section>
 
-    <!-- About Me Section -->
-    <section id="about">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-container">
-            <div class="about-text">
-                <p>
-                    I am currently an 11th-grade Math major student at <strong>VNU-HCM High School for the Gifted</strong> (PTNK). 
-                    With a strong passion for technology, I am pursuing a career path in <strong>Computer Science</strong> and <strong>Artificial Intelligence (AI)</strong>.
-                </p>
-                <p>
-                    I dedicate most of my free time to writing code, solving complex algorithmic problems, and exploring new AI models.
-                    Additionally, sports are how I maintain a healthy work-life balance.
-                </p>
-                
-                <div class="personal-info">
-                    <div class="info-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>Email</span>
-                        <a href="mailto:phuochq2009@gmail.com">phuochq2009@gmail.com</a>
-                    </div>
-                    <div class="info-item">
-                        <i class="fab fa-github"></i>
-                        <span>Github</span>
-                        <a href="https://github.com/phuochq2009" target="_blank">@phuochq2009</a>
-                    </div>
-                    <div class="info-item">
-                        <i class="fas fa-school"></i>
-                        <span>School</span>
-                        <span>PTNK - ĐHQG TP.HCM</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section id="academics">
+ <h2 class="section-title">Academics &amp; Awards</h2>
+ <h3 class="sub">Education &amp; test scores</h3>
+ <div class="grid">
+  <div class="card"><h3>PTNK, Mathematics Major</h3><div class="meta">VNU-HCM High School for the Gifted · 2024 – 2027</div>
+   <p>Previously at Trần Đại Nghĩa High School for the Gifted (2020 – 2024).</p>
+   <ul><li>GPA: Grade 9 – 9.4 · Grade 10 – 9.6 · Current – 9.6</li></ul></div>
+  <div class="card"><h3>Standardized tests</h3><div class="meta">Scores</div>
+   <ul><li>SAT: 1490</li><li>IELTS: 7.0</li></ul>
+   <div class="tags"><span class="tag hl">AP Calculus BC: 5</span><span class="tag hl">AP Statistics: 5</span><span class="tag hl">AP CS A: 5</span></div></div>
+  <div class="card"><h3>Courses &amp; certificates</h3><div class="meta">MindX · Coursera · FPT Polytechnic</div>
+   <ul><li>MindX Technology School (2024 – 2026): 3 Computer Science courses (Basic, Advanced, Intensive) and 3 Web Development courses (Basic, Advanced, Intensive)</li>
+   <li>Computer Science: Programming with a Purpose, Princeton University (Coursera, 2025)</li>
+   <li>Generative AI Toolkit Badge, FPT Polytechnic (2026)</li></ul></div>
+ </div>
+ <h3 class="sub">Honors &amp; awards</h3>
+ <div class="grid">
+  <div class="card"><h3>Gold Award</h3><div class="meta">HKIMO 2026 · National Heat Round</div><p>Hong Kong International Mathematical Olympiad.</p></div>
+  <div class="card"><h3>Bronze Award</h3><div class="meta">HKIMO 2026 · International Round</div><p>Hong Kong International Mathematical Olympiad.</p></div>
+  <div class="card"><h3>Best Environmental Impact</h3><div class="meta">AI Challenge Eco Gen (AIC) · 2026</div><p>Recognized for an AI project on environmental sustainability.</p></div>
+  <div class="card"><h3>Distinction</h3><div class="meta">American Mathematics Competitions · 2026</div><p>AMC.</p></div>
+  <div class="card"><h3>AP Scholar Award</h3><div class="meta">National – Viet Nam · 2026</div><p>Scored 3 or higher on 3+ AP exams.</p></div>
+  <div class="card"><h3>Silver Medal</h3><div class="meta">VTMO 2022</div><p>Vietnam Titan Math Olympiad.</p></div>
+ </div>
+</section>
 
-    <!-- Academics Section -->
-    <section id="academics">
-        <h2 class="section-title">Academics Achievement</h2>
-        <div class="cards-container">
-            <!-- Card 1 -->
-            <div class="card">
-                <i class="fas fa-graduation-cap card-icon"></i>
-                <h3>Major</h3>
-                <p>11th Grade Math Class</p>
-                <p class="highlight-text">VNU-HCM High School for the Gifted</p>
-                <p style="margin-top: 10px; font-size: 0.9rem; color: #aaa;">A highly competitive and dynamic learning environment.</p>
-            </div>
-            
-            <!-- Card 2 -->
-            <div class="card">
-                <i class="fas fa-medal card-icon"></i>
-                <h3>Awards</h3>
-                <p>Silver Medal</p>
-                <p class="highlight-text">VTMO 2022</p>
-                <p style="margin-top: 10px; font-size: 0.9rem; color: #aaa;">Vietnam Titan Math Olympiad</p>
-            </div>
-            
-            <!-- Card 3 -->
-            <div class="card">
-                <i class="fas fa-book-reader card-icon"></i>
-                <h3>AP Coursework</h3>
-                <p>Currently studying & Preparing for exams:</p>
-                <ul>
-                    <li>AP Calculus BC</li>
-                    <li>AP Statistics</li>
-                    <li>AP Computer Science A</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+<section id="research" class="alt">
+ <h2 class="section-title">Research</h2>
+ <div class="grid">
+  <div class="card"><span class="badge">Submitted · ICIIT 2027</span><h3>Noise-Robust Vietnamese Speaker Verification with Teacher-Student Alignment</h3><div class="meta">First author · Jun – Sep 2026</div>
+   <p>Tested whether teacher-student objectives and Gaussian KL help short, noisy Vietnamese speaker verification, across 27 duration-noise conditions.</p>
+   <ul><li>Plain AAM adaptation cut EER from 20.03% to 12.70% (clean) and 32.78% to 23.82% (0 dB noise)</li><li>Bootstrap CIs showed no statistically supported gain from the auxiliary losses</li><li>Advisors from HCMUT AI Tech Lab</li></ul>
+   <div class="tags"><span class="tag">ECAPA-TDNN</span><span class="tag">Deep learning</span><span class="tag">Statistics</span></div></div>
+  <div class="card"><span class="badge">Submitted · ICIIT 2027</span><h3>Efficient Wake-Word Detection via ASR Distillation</h3><div class="meta">Researcher · Jun – Sep 2026</div>
+   <p>Distilled a 0.6B-parameter Vietnamese ASR model into a 5M-parameter streaming wake-word detector.</p>
+   <ul><li>20.5% miss rate at 0.1 false accepts/hour, vs 57–85% for untuned baselines</li><li>30× faster than real time on one CPU thread</li><li>Isolated-clip tests understate real error by up to 19×</li></ul>
+   <div class="tags"><span class="tag">Conformer</span><span class="tag">Knowledge distillation</span><span class="tag">CTC</span></div></div>
+  <div class="card"><h3>Dual-Stream AQI Forecasting</h3><div class="meta">Researcher &amp; team leader · Mar – Jul 2026</div>
+   <p>Real-time air quality monitoring plus a Stacked Deep LSTM that forecasts AQI 3 hours ahead, shown on a ReactJS dashboard with health warnings. Also presented as the "AI-R Quality" poster.</p>
+   <ul><li>35,064 hourly samples, 16 features</li><li>R² 0.7962 · MAE 0.29 · RMSE 0.38</li></ul>
+   <div class="tags"><span class="tag">LSTM</span><span class="tag">Time series</span><span class="tag">ReactJS</span></div></div>
+  <div class="card"><h3>Dynamic Approval Workflows with FSM &amp; ABAC</h3><div class="meta">Researcher · Oct 2025 – Feb 2026</div>
+   <p>E-submission system for a multi-branch logistics company, using finite state machines, parallel "AND-Join" synchronization, and attribute-based access control.</p>
+   <ul><li>Turnaround cut from 5 days to under 24 hours</li><li>Pilot with 150+ users, 0% document loss</li></ul>
+   <div class="tags"><span class="tag">FSM</span><span class="tag">ABAC</span><span class="tag">Groovy</span></div></div>
+ </div>
+</section>
 
-    <!-- Projects Section -->
-    <section id="projects">
-        <h2 class="section-title">Creative Works & Skills</h2>
-        <div class="projects-grid">
-            
-            <!-- Project 1 -->
-            <div class="project-card">
-                <div class="project-header">
-                    <i class="fas fa-gamepad project-icon"></i>
-                    <h3>Game Library Wiki</h3>
-                </div>
-                <p>A website that curates and describes a list of various video games. It features game summaries and visual showcases, built to practice front-end development.</p>
-                <div class="skills">
-                    <span class="skill-tag">HTML5</span>
-                    <span class="skill-tag">CSS3</span>
-                    <span class="skill-tag">JavaScript</span>
-                </div>
-                <a href="#" class="project-link">View Project <i class="fas fa-arrow-right"></i></a>
-            </div>
+<section id="projects">
+ <h2 class="section-title">Projects</h2>
+ <div class="grid">
+  <div class="card"><h3>Medicare System</h3><div class="meta">Founder &amp; developer · Jul – Oct 2025</div>
+   <p>Digitizes clinic administration and the patient experience.</p>
+   <ul><li>Dashboard, invoicing, and medicine/stock management</li><li>Online booking with email/SMS confirmation</li><li>Check-in cut waiting time from 10–15 to 2–3 minutes</li><li>RBAC, JWT and encrypted data</li></ul>
+   <div class="tags"><span class="tag hl">ReactJS</span><span class="tag">PHP</span><span class="tag">MySQL</span><span class="tag">Tailwind</span><span class="tag">Zustand</span></div></div>
+  <div class="card"><h3>VN-Exams</h3><div class="meta">CTO · Nov 2025 – Present</div>
+   <p>Exam-prep platform for V-ACT, HSA and TSA with 30+ full mock exams and 4,000+ questions.</p>
+   <ul><li>CSV-to-dashboard content pipeline with manual review</li><li>Supabase APIs, schema fixes, and end-to-end QA</li></ul>
+   <div class="tags"><span class="tag hl">TypeScript</span><span class="tag">Python</span><span class="tag">Supabase</span></div>
+   <a href="https://vn-exams.com" target="_blank" rel="noopener" class="meta" style="margin:12px 0 0">vn-exams.com</a></div>
+  <div class="card"><h3>CPI × SPX Impact Dashboard</h3><div class="meta">Co-developer · Mar – Jun 2026</div>
+   <p>Predicts how a CPI release moves the S&amp;P 500 and turns it into an educational stock/bond allocation signal for first-time investors.</p>
+   <ul><li>Three-model XGBoost pipeline plus rules engine with optional OpenAI review</li><li>Live Yahoo Finance and BLS data, with safe fallbacks</li><li>Deployed on Render</li></ul>
+   <div class="tags"><span class="tag hl">Python</span><span class="tag">XGBoost</span><span class="tag">Streamlit</span><span class="tag">OpenAI API</span></div></div>
+  <div class="card"><h3>Game Library Wiki</h3><div class="meta">Front-end practice</div>
+   <p>A site that curates video games with summaries and visual showcases.</p>
+   <div class="tags"><span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span></div></div>
+  <div class="card"><h3>LeetCode Practice</h3><div class="meta">Algorithms</div>
+   <p>Dozens of data structure and algorithm problems solved in Python.</p>
+   <div class="tags"><span class="tag hl">Python</span><span class="tag">DSA</span><a href="https://github.com/phuochq2009" target="_blank" rel="noopener" class="tag">GitHub</a></div></div>
+  <div class="card"><h3>Podcast: AI in my pocket</h3><div class="meta">Founder · Feb 2026 – Present</div>
+   <p>A Gen Z high schooler on tech, study stress, mental health and healthcare, and why we need real data before AI.</p>
+   <div class="tags"><a href="https://open.spotify.com/show/6pknd3AvSCqNl10at3xLEF" target="_blank" rel="noopener" class="tag hl"> Listen on Spotify</a></div></div>
+ </div>
+ <h3 class="sub" style="text-align:center;margin-top:50px">Tech stack</h3>
+ <div class="pills">
+  <span class="pill">Python (strongest)</span><span class="pill">Java</span>
+  <span class="pill">JavaScript / TypeScript</span><span class="pill">React</span>
+  <span class="pill">PHP</span><span class="pill">MySQL · Supabase</span>
+  <span class="pill">LSTM · XGBoost · scikit-learn</span><span class="pill">Git / GitHub</span>
+ </div>
+</section>
 
-            <!-- Project 2 -->
-            <div class="project-card">
-                <div class="project-header">
-                    <i class="fas fa-code project-icon"></i>
-                    <h3>LeetCode Grinding</h3>
-                </div>
-                <p>Solved dozens of problems regarding Data Structures and Algorithms (DSA) on LeetCode to sharpen logical thinking and coding efficiency.</p>
-                <div class="skills">
-                    <span class="skill-tag highlight-skill">Python</span>
-                    <span class="skill-tag">Algorithms</span>
-                    <span class="skill-tag">Data Structures</span>
-                </div>
-                <a href="https://github.com/phuochq2009" target="_blank" class="project-link">Visit Github <i class="fab fa-github"></i></a>
-            </div>
+<section id="experience" class="alt">
+ <h2 class="section-title">Experience &amp; Leadership</h2>
+ <div class="tl">
+  <div class="tl-item"><h4>Founder &amp; President · Future Computing Initiative</h4><div class="meta">Nov 2024 – Present</div><ul>
+   <li>Student-led club connecting students with the tech industry through company visits and career exploration</li><li>Organized visits to 5+ technology companies</li></ul></div>
+  <div class="tl-item"><h4>Founder &amp; President · Mộc Sắc Việt</h4><div class="meta">Jul 2024 – Present</div><ul>
+   <li>Cultural media project promoting Hue's history and heritage through research and short videos</li><li>Researched 10+ landmarks, produced 10+ short videos and 20+ content pieces</li></ul></div>
+  <div class="tl-item"><h4>Intern, Technology Consulting · Revive Technologies Inc</h4><div class="meta">May – Aug 2026</div><ul>
+   <li>Supported AI proof-of-concept and pilot projects for customers across APEC</li><li>Helped build a knowledge-base governance framework for AI in the Vietnamese market</li><li>Researched Voice AI for contact centers and tested robot behaviors with AI and control software</li></ul></div>
+  <div class="tl-item"><h4>Intern, AI Challenge · HCMUTE</h4><div class="meta">Jun – Jul 2026</div><ul>
+   <li>Built a transfer-learning waste classifier (plastic, paper, metal, organic) with confusion-matrix and failure analysis</li><li>Developed object detection and vegetation-health modules; pitched the final project to academic mentors</li></ul></div>
+  <div class="tl-item"><h4>Vice Head of HR · MARs organization</h4><div class="meta">Sep 2025 – Present</div><ul>
+   <li>Coordinated tasks for 40 members between the board and departments</li><li>Ran recruitment, soft-skills workshops, and feedback-based improvements</li></ul></div>
+  <div class="tl-item"><h4>Intern, Application Development · Saigon Treasure Commercial Joint Stock Bank (Sacombank)</h4><div class="meta">Jul – Aug 2025</div><ul>
+   <li>Built an image classifier and an object-detection pipeline</li><li>Helped build a voicebot for debt-collection support</li></ul></div>
+  <div class="tl-item"><h4>Field experience · EB Environmental Energy (Thừa Thiên Huế)</h4><div class="meta">Aug 2025</div><ul>
+   <li>Saw waste-to-energy, waste handling, and wastewater treatment processes up close</li></ul></div>
+  <div class="tl-item"><h4>"A Day as a Scientist" · Institute of Biotechnology, Hue University</h4><div class="meta">Aug 2025</div><ul>
+   <li>Biosafety practice and RT-PCR preparation; toured fermentation, enzyme, and molecular biology labs</li><li>Featured in a Vietnam News Agency televised interview</li></ul></div>
+ </div>
+</section>
 
-            <!-- Skills Summary (Dạng Card) -->
-            <div class="project-card" style="border-color: #00f2fe;">
-                <div class="project-header">
-                    <i class="fas fa-tools project-icon" style="color: #00f2fe;"></i>
-                    <h3>Tech Stack</h3>
-                </div>
-                <p>Technologies and languages I use frequently:</p>
-                <div class="skills">
-                    <span class="skill-tag highlight-skill">Python (Strongest)</span>
-                    <span class="skill-tag">Java</span>
-                    <span class="skill-tag">HTML/CSS</span>
-                    <span class="skill-tag">JavaScript</span>
-                    <span class="skill-tag">Git/Github</span>
-                </div>
-            </div>
-        </div>
-    </section>
+<section id="community">
+ <h2 class="section-title">Community Service</h2>
+ <div class="grid">
+  <div class="card"><h3>Thừa Thiên Huế Volunteer Campaign</h3><div class="meta">Chair of the Organizing Committee · Jul 2025</div>
+   <ul><li>Hue Central Hospital: raised 5M VND for 50+ children with cancer and donated 20 cartons of milk</li><li>SOS Children's Village: ran craft activities and gave 2M VND and 3 cartons of candy to 60+ children</li><li>Hope Center: handed out 20 rice relief packages and ran an inclusive pottery and recycled-keychain event</li><li>Scheduled teams of 5 to 15+ volunteers</li></ul></div>
+  <div class="card"><h3>Volunteer Cook · Quán cơm 2000đ</h3><div class="meta">Aug 2025</div><p>Helped prepare 1,000+ charity meals for a hospital with a team of 30+.</p></div>
+  <div class="card"><h3>Volunteer Teacher · May Man Shelter</h3><div class="meta">Aug 2025</div><p>Taught English and Math to 40+ children and handed out 80+ snack packs as rewards.</p></div>
+ </div>
+ <h3 class="sub" style="text-align:center;margin-top:50px">Outside of code</h3>
+ <div class="pills"><span class="pill">Football</span><span class="pill">Badminton</span><span class="pill">Running</span></div>
+</section>
 
-    <!-- Activities Section -->
-    <section id="activities">
-        <h2 class="section-title">Favored Activities</h2>
-        <div class="activities-content">
-            <div class="activity-item">
-                <i class="fas fa-futbol"></i>
-                <h4>Football</h4>
-                <p>Building endurance and teamwork skills after intense coding sessions.</p>
-            </div>
-            <div class="activity-item">
-                <i class="fas fa-feather-alt"></i>
-                <h4>Badminton</h4>
-                <p>My favorite sport for training reflexes, agility, and flexibility.</p>
-            </div>
-        </div>
-    </section>
+<footer id="contact">
+ <h2>Let's connect</h2>
+ <p>Open to talking about math, AI research, and building useful things.</p>
+ <div class="social">
+  <a href="mailto:phuochq2009@gmail.com" aria-label="Email">Email</a>
+  <a href="https://github.com/phuochq2009" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a>
+  <a href="https://www.facebook.com/huaphuoc.920845/" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+  <a href="https://open.spotify.com/show/6pknd3AvSCqNl10at3xLEF" target="_blank" rel="noopener" aria-label="Podcast">Podcast</a>
+ </div>
+ <p class="copy">© 2026 Hứa Quang Phước</p>
+</footer>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="footer-content">
-            <h2>Let's Connect!</h2>
-            <p>I am always open to discussing Math, Programming, and interesting projects.</p>
-            <div class="social-links">
-                <a href="mailto:phuochq2009@gmail.com" class="social-btn"><i class="fas fa-envelope"></i></a>
-                <a href="https://github.com/phuochq2009" target="_blank" class="social-btn"><i class="fab fa-github"></i></a>
-                <a href="https://www.facebook.com/huaphuoc.920845/" class="social-btn"><i class="fab fa-facebook-f"></i></a>
-            </div>
-            <p class="copyright">© 2024 Hua Quang Phuoc. Designed with <i class="fas fa-heart" style="color: #4facfe;"></i> & Code.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Toggle Mobile Menu
-        const burger = document.querySelector('.burger');
-        const nav = document.querySelector('.nav-links');
-        const navLinks = document.querySelectorAll('.nav-links li');
-
-        burger.addEventListener('click', () => {
-            // Toggle Nav
-            nav.classList.toggle('nav-active');
-            
-            // Animate Links
-            navLinks.forEach((link, index) => {
-                if (link.style.animation) {
-                    link.style.animation = '';
-                } else {
-                    link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
-                }
-            });
-            
-            // Burger Animation
-            burger.classList.toggle('toggle');
-        });
-
-        // Close menu when clicking a link
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('nav-active');
-                burger.classList.remove('toggle');
-                navLinks.forEach(link => link.style.animation = '');
-            });
-        });
-    </script>
+<script>
+const b=document.getElementById('burger'),m=document.getElementById('menu');
+const set=o=>{m.classList.toggle('open',o);b.setAttribute('aria-expanded',o)};
+b.addEventListener('click',()=>set(!m.classList.contains('open')));
+m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>set(false)));
+</script>
 </body>
 </html>
